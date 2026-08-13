@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sanvee's by Tony | Premium Fashion</title>
+<style>
+:root{--bg:#fff8fb;--dark:#24141c;--pink:#c94f78;--gold:#c79b45;--muted:#75656d}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,"Noto Sans Bengali",sans-serif;background:var(--bg);color:var(--dark)}
+header{background:#fff;position:sticky;top:0;z-index:10;border-bottom:1px solid #f0dfe5}
+.nav{max-width:1100px;margin:auto;padding:15px 18px;display:flex;align-items:center;justify-content:space-between;gap:15px}
+.logo{font-family:Georgia,serif;font-size:25px;font-weight:bold;color:var(--pink)}
+.cart{border:0;background:var(--dark);color:#fff;border-radius:25px;padding:10px 16px;cursor:pointer}
+.hero{max-width:1100px;margin:auto;padding:60px 18px;display:grid;grid-template-columns:1.1fr .9fr;gap:35px;align-items:center}
+.hero h1{font-family:Georgia,serif;font-size:52px;line-height:1.05;margin:0 0 15px}
+.hero h1 span{color:var(--pink)}.hero p{color:var(--muted);font-size:17px;line-height:1.7}
+.btn{display:inline-block;background:var(--pink);color:#fff;border:0;padding:13px 22px;border-radius:25px;font-weight:bold;cursor:pointer}
+.hero-art{min-height:320px;border-radius:30px;background:linear-gradient(135deg,#f7dbe5,#f3c5d4,#ead8c2);display:flex;align-items:center;justify-content:center;font-size:110px;box-shadow:0 20px 50px #c94f7830}
+.wrap{max-width:1100px;margin:auto;padding:25px 18px 55px}
+h2{text-align:center;font-family:Georgia,serif;font-size:32px}
+.categories{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin:20px 0 30px}
+.cat{background:#fff;border:1px solid #efd8e0;border-radius:22px;padding:10px 17px;cursor:pointer}
+.products{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px}
+.product{background:#fff;border-radius:18px;overflow:hidden;border:1px solid #f0dfe5;box-shadow:0 8px 25px #3a14200b}
+.pic{height:210px;display:flex;align-items:center;justify-content:center;font-size:75px;background:#f9e8ee}
+.info{padding:16px}.info h3{margin:0 0 8px}.price{font-size:19px;font-weight:bold;color:var(--pink);margin:10px 0}
+.info button{width:100%;border:0;background:var(--dark);color:#fff;padding:11px;border-radius:10px;cursor:pointer}
+.order{margin-top:45px;background:#fff;border:1px solid #efdde3;border-radius:20px;padding:25px}
+form{display:grid;gap:12px;max-width:600px;margin:auto}
+input,textarea{width:100%;padding:13px;border:1px solid #e5d5dc;border-radius:10px;font:inherit}
+textarea{min-height:90px;resize:vertical}
+footer{background:var(--dark);color:#fff;text-align:center;padding:30px 18px}.small{color:#cdbec4;font-size:13px}
+.modal{display:none;position:fixed;inset:0;background:#0008;z-index:20;padding:20px}
+.modalbox{background:#fff;max-width:500px;margin:7vh auto;padding:25px;border-radius:20px}
+.close{float:right;border:0;background:none;font-size:25px;cursor:pointer}
+#cartItems{line-height:1.8}.total{font-weight:bold;font-size:18px;margin:15px 0}
+@media(max-width:750px){.hero{grid-template-columns:1fr;text-align:center}.hero h1{font-size:40px}.hero-art{min-height:230px}.nav{padding:12px}.logo{font-size:20px}}
+</style>
+</head>
+<body>
+<header><div class="nav"><div class="logo">Sanvee's by Tony</div><button class="cart" onclick="openCart()">🛒 Cart (<span id="count">0</span>)</button></div></header>
+
+<section class="hero">
+<div><p>✨ PREMIUM WOMEN'S FASHION</p><h1>Elegance made <span>for you.</span></h1>
+<p>শাড়ি, থ্রি-পিস, জুয়েলারি ও কসমেটিকস—আপনার স্টাইলকে আরও সুন্দর করতে Sanvee's by Tony.</p>
+<button class="btn" onclick="document.getElementById('shop').scrollIntoView({behavior:'smooth'})">Shop Now</button></div>
+<div class="hero-art">👗</div>
+</section>
+
+<section class="wrap" id="shop">
+<h2>Our Collection</h2>
+<div class="categories">
+<button class="cat" onclick="filter('সব')">সব</button><button class="cat" onclick="filter('শাড়ি')">শাড়ি</button>
+<button class="cat" onclick="filter('থ্রি-পিস')">থ্রি-পিস</button><button class="cat" onclick="filter('জুয়েলারি')">জুয়েলারি</button><button class="cat" onclick="filter('কসমেটিকস')">কসমেটিকস</button>
+</div>
+<div class="products" id="products"></div>
+
+<div class="order"><h2>📦 Order Request</h2>
+<form onsubmit="submitOrder(event)">
+<input id="name" placeholder="আপনার নাম" required><input id="phone" placeholder="ফোন নম্বর" required>
+<textarea id="address" placeholder="ডেলিভারি ঠিকানা" required></textarea>
+<input id="orderItems" placeholder="যে পণ্যটি নিতে চান" required>
+<button class="btn" type="submit">অর্ডার রিকোয়েস্ট পাঠান</button>
+</form>
+<p id="msg" style="text-align:center;color:#2b7a4b"></p>
+</div>
+</section>
+
+<footer><b>Sanvee's by Tony</b><p class="small">Premium Fashion Store • Cash on Delivery demo</p><p class="small">ফোন/WhatsApp ও আসল পণ্যের তথ্য পরে যোগ করা যাবে।</p></footer>
+
+<div class="modal" id="modal"><div class="modalbox"><button class="close" onclick="closeCart()">×</button><h2>Your Cart</h2><div id="cartItems"></div><div class="total" id="total"></div><button class="btn" onclick="closeCart();document.getElementById('orderItems').value=cart.map(x=>x.name).join(', ');document.getElementById('orderItems').focus()">অর্ডার করতে এগিয়ে যান</button></div></div>
+
+<script>
+const products=[
+{name:'Royal Rose Saree',cat:'শাড়ি',price:1850,icon:'🥻'},
+{name:'Elegant Three-Piece',cat:'থ্রি-পিস',price:1450,icon:'👚'},
+{name:'Golden Pearl Set',cat:'জুয়েলারি',price:850,icon:'💍'},
+{name:'Glow Beauty Kit',cat:'কসমেটিকস',price:990,icon:'💄'},
+{name:'Classic Silk Saree',cat:'শাড়ি',price:2250,icon:'🥻'},
+{name:'Premium Party Set',cat:'থ্রি-পিস',price:1750,icon:'👗'},
+{name:'Crystal Earrings',cat:'জুয়েলারি',price:650,icon:'💎'},
+{name:'Daily Glam Kit',cat:'কসমেটিকস',price:750,icon:'💋'}
+];
+let cart=[];
+function money(n){return '৳'+n.toLocaleString('en-IN')}
+function render(list=products){document.getElementById('products').innerHTML=list.map((p,i)=>`<div class="product"><div class="pic">${p.icon}</div><div class="info"><h3>${p.name}</h3><small>${p.cat}</small><div class="price">${money(p.price)}</div><button onclick="add(${products.indexOf(p)})">Add to Cart</button></div></div>`).join('')}
+function filter(c){render(c==='সব'?products:products.filter(p=>p.cat===c))}
+function add(i){cart.push(products[i]);document.getElementById('count').textContent=cart.length}
+function openCart(){document.getElementById('modal').style.display='block';let box=document.getElementById('cartItems');if(!cart.length){box.innerHTML='কার্ট খালি।';document.getElementById('total').textContent=''}else{box.innerHTML=cart.map((p,i)=>`${i+1}. ${p.name} — ${money(p.price)}`).join('<br>');document.getElementById('total').textContent='মোট: '+money(cart.reduce((s,p)=>s+p.price,0))}}
+function closeCart(){document.getElementById('modal').style.display='none'}
+function submitOrder(e){e.preventDefault();document.getElementById('msg').textContent='ধন্যবাদ! আপনার অর্ডার রিকোয়েস্ট প্রস্তুত হয়েছে। ফোন/WhatsApp নম্বর যোগ করলে সরাসরি পাঠানোর ব্যবস্থা করা যাবে।';}
+render();
+</script>
+</body>
+</html>
